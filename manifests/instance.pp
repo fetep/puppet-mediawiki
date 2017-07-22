@@ -46,7 +46,7 @@ define mediawiki::instance (
   $port                   = '80',
   $server_aliases         = '',
   $ensure                 = 'present',
-  $allow_html_email      = 'false',
+  $allow_html_email       = 'false',
   $additional_mail_params = 'none',
   $logo_url               = false,
   $external_smtp          = false,
