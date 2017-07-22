@@ -85,6 +85,7 @@ class mediawiki (
   $doc_root       = $mediawiki::params::doc_root,
   $tarball_url    = $mediawiki::params::tarball_url,
   $package_ensure = 'latest',
+  $packages       = $mediawiki::params::packages,
   $max_memory     = '2048'
   ) inherits mediawiki::params {
 
@@ -111,10 +112,10 @@ class mediawiki (
     root_password => $db_root_password,
   }
 
-  package { $mediawiki::params::packages:
+  package { $packages:
     ensure  => $package_ensure,
   }
-  Package[$mediawiki::params::packages] ~> Service<| title == $mediawiki::params::apache |>
+  Package[$packages] ~> Service<| title == $mediawiki::params::apache |>
 
   # Make sure the directories and files common for all instances are included
   file { 'mediawiki_conf_dir':
