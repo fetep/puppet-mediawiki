@@ -86,8 +86,8 @@ class mediawiki (
   $tarball_url    = $mediawiki::params::tarball_url,
   $package_ensure = 'latest',
   $packages       = $mediawiki::params::packages,
-  $php_version    = undef,
-  $max_memory     = '2048'
+  $max_memory     = '2048',
+  $manage_php     = true,
   ) inherits mediawiki::params {
 
   $web_dir = $mediawiki::params::web_dir
@@ -106,8 +106,8 @@ class mediawiki (
     mpm_module => 'prefork',
   }
 
-  class { 'apache::mod::php':
-    php_version => $php_version,
+  if $manage_php {
+    class { 'apache::mod::php': }
   }
 
   # Manages the mysql server package and service by default
